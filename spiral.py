@@ -106,7 +106,7 @@ class Arguments:
 
     @property
     def display(self):
-        return self._animated
+        return self._display
 
     @display.setter
     def display(self, value: bool):
@@ -302,44 +302,49 @@ if __name__ == "__main__":
     
     parser.add_argument('-d', dest='display', action='store_true', help="when set, display effect in default image viewer")
 
-    parser.add_argument('-p', dest='primes_color', type=str, help="color of primes in spiral")
-    parser.add_argument('-c', dest='composites_color', type=str, help="color of composite number in spiral")
+    parser.add_argument('-p', dest='primes_color', type=str, help="color of primes in spiral, can be an english word or html hex code")
+    parser.add_argument('-c', dest='composites_color', type=str, help="color of composite numbers in spiral, can be an english word or html hex code")
 
-    parser.add_argument('-a', dest='animated', action='store_true', help="when set program will generate GIF instead of still image")
+    parser.add_argument('-a', dest='animated', action='store_true', help="when set program will generate GIF animation instead of single image")
     parser.add_argument('-t', dest='interval', type=int, metavar="<int>", help="duration of animation in ms, only relevant if animation flag is set")
-    parser.add_argument('-w', dest='walker_color', type=str, help="color of spiral walker, only relevant if animation flag is set")
+    parser.add_argument('-w', dest='walker_color', type=str, help="color of spiral walker, can be an english word or html hex code, only relevant if animation flag is set")
 
     args = Arguments()
     parser.parse_args(namespace=args)
 
+    print("Generating Ulam spiral")
     beg = time()
     frames = generate_ulam_spiral(args.n, args.primes_color, args.composites_color, args.walker_color, args.animated)
-    print(time() - beg, "after frames")
+    print(f"spiral generated, took {time() - beg:.3f} seconds")
+    print()
 
+    print("Resizing image")
     beg = time()
     #frames = [resize_pixels_to_squares(img, args.pixel_square_size) for img in frames]
     frames = [expand_matrix(img, args.pixel_square_size) for img in frames]
-    print(time() - beg, "after resize")
-
-    print("ale fługi: ", len(frames))
+    print(f"Image resized, took {time() - beg:.3f} seconds")
+    print()
     
+
+    print("Converting to Pillow Image")
     beg = time()
     images = [Image.fromarray(frame) for frame in frames]
-    print(time() - beg, "after pillow")
-
-
+    print(f"Converted, took {time() - beg:.3f} seconds")
+    print()
+    
     
     if args.animated:
         args.extension = 'gif'
     filename = f"{args.filename}.{args.extension}"
 
+    print("Saving to a flile")
     beg = time()
     if args.animated:
         images[0].save(filename, format='GIF', append_images=images, save_all=True, duration=args.interval, loop=1)
     else:
         images[-1].save(filename, format=args.extension.upper())
-    print(time() - beg, "after save")
-
+    print(f"Image saved at file {filename}, took {time() - beg:.3f} seconds")
+    print()
+    
     if args.display:
-        
         os.system(f'start {filename}')
