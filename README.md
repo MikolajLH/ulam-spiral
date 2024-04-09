@@ -6,11 +6,11 @@ You can read more about Ulam spiral [here](https://en.wikipedia.org/wiki/Ulam_sp
 
 ---
 
-Usage:
+## Usage:
 
-python spiral.py [-h] -n <int> [-o <str>] [-s <int>] [-e <str>] [-d] [-p PRIMES_COLOR] [-c COMPOSITES_COLOR] [-a] [-t <int>] [-w WALKER_COLOR]
+`python spiral.py [-h] -n <int> [-o <str>] [-s <int>] [-e <str>] [-d] [-p <color>] [-c <color>] [-a] [-t <int>] [-w <color>]`
 
-options:
+### options:
 
 -  -h, --help           show this help message and exit
 -  -n <int>             size of the side of the spiral, total number of integers inside spiral is n x n
@@ -24,7 +24,7 @@ options:
 -  -t <int>             duration of animation in ms, only relevant if animation flag is set
 -  -w WALKER_COLOR      color of spiral walker, can be an english word or html hex code, only relevant if animation flag is set
 
-Example:
+## Example:
 
 `python spiral.py -n 101 -o 'example' -s 6 -d -p 'black' -c '#ffffff'`
 
