@@ -8,7 +8,7 @@ You can read more about Ulam spiral [here](https://en.wikipedia.org/wiki/Ulam_sp
 
 Usage:
 
-==python spiral.py [-h] -n <int> [-o <str>] [-s <int>] [-e <str>] [-d] [-p PRIMES_COLOR] [-c COMPOSITES_COLOR] [-a] [-t <int>] [-w WALKER_COLOR]==
+`python spiral.py [-h] -n <int> [-o <str>] [-s <int>] [-e <str>] [-d] [-p PRIMES_COLOR] [-c COMPOSITES_COLOR] [-a] [-t <int>] [-w WALKER_COLOR]`
 
 options:
 
